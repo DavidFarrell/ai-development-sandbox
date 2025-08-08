@@ -1,0 +1,3 @@
+#!/bin/bash
+# Quick script to start the AI development sandbox
+docker-compose run --rm dev-sandbox bash

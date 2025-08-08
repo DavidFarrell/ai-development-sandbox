@@ -1,0 +1,29 @@
+# AI Development Sandbox
+# Safe environment for AI-assisted development with persistent settings
+# Usage: docker-compose run --rm dev-sandbox bash
+
+services:
+  dev-sandbox:
+    build: .
+    volumes:
+      # Project files - your actual code repositories
+      - ./projects:/workspace/projects:rw
+      
+      # Git configuration (read-only for security)
+      - ~/.gitconfig:/home/dev/.gitconfig:ro
+      
+      # SSH keys for GitHub access (read-only for security) 
+      - ~/.ssh:/home/dev/.ssh:ro
+      
+      # Claude Code settings and MCP configurations (persistent)
+      - ./claude-settings:/home/dev/.claude:rw
+      
+      # OpenCode authentication data (persistent)
+      - ./opencode-auth:/home/dev/.local/share/opencode:rw
+      
+    environment:
+      - CLAUDE_CONFIG_DIR=/home/dev/.claude
+      
+    working_dir: /workspace/projects
+    stdin_open: true
+    tty: true
