@@ -27,3 +27,7 @@ services:
     working_dir: /workspace/projects
     stdin_open: true
     tty: true
+    # network_mode: host  # This was causing browser path detection issues
+    # Use port mapping instead of host networking
+    ports:
+      - "3000:3000"
